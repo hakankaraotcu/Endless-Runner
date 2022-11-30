@@ -10,7 +10,7 @@ public class PlayerTouchController : MonoBehaviour
     public bool slide = false;
 
     public Side side = Side.Mid;
-    
+
     private float newXPos = 0f;
 
     [HideInInspector]
@@ -28,12 +28,12 @@ public class PlayerTouchController : MonoBehaviour
     private float colHeight;
     private float colCenterY;
 
-    private float x1, x2, y1, y2; 
+    private float x1, x2, y1, y2;
 
     public Animator anim;
     private CharacterController controller;
 
-    
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -42,9 +42,9 @@ public class PlayerTouchController : MonoBehaviour
         colCenterY = controller.center.y;
         transform.position = Vector3.zero;
     }
-    
+
     void Update()
-    {   
+    {
         if (Input.GetMouseButtonDown(0))
         {
             x1 = Input.mousePosition.x;
@@ -56,7 +56,7 @@ public class PlayerTouchController : MonoBehaviour
         {
             x2 = Input.mousePosition.x;
             y2 = Input.mousePosition.y;
-        
+
             swipeRight = x2 - x1 > Screen.width / 5;
             swipeLeft = x2 - x1 < 0 && Mathf.Abs(x2 - x1) > Screen.width / 5;
             swipeUp = y2 - y1 > Screen.height / 5;
@@ -92,10 +92,15 @@ public class PlayerTouchController : MonoBehaviour
                 continueToMove = false;
             }
 
-            if(swipeUp)
+            if (swipeUp)
             {
                 JumpMouse();
-		        continueToMove = false;
+                continueToMove = false;
+            }
+
+            if (swipeDown && !slide)
+            {
+                StartCoroutine(SlideMouse());
             }
         }
 
@@ -115,12 +120,9 @@ public class PlayerTouchController : MonoBehaviour
         JumpMouse();
 
         // Sliding
-        if(swipeDown && !slide)
-        {
-            StartCoroutine(SlideMouse());
-        }
+
     }
-    
+
     private void JumpMouse()
     {
         if (controller.isGrounded)
@@ -143,6 +145,7 @@ public class PlayerTouchController : MonoBehaviour
 
     private IEnumerator SlideMouse()
     {
+        swipeDown = false;
         slide = true;
         anim.SetBool("isSlide", slide);
         controller.center = new Vector3(0, colCenterY / 2f, 0);
