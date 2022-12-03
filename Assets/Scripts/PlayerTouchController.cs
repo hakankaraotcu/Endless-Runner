@@ -30,7 +30,7 @@ public class PlayerTouchController : MonoBehaviour
     private CharacterController controller;
 
 
-    void Start()
+    private void Start()
     {
         isJumping = false;
         isSliding = false;
@@ -46,7 +46,7 @@ public class PlayerTouchController : MonoBehaviour
         transform.position = Vector3.zero;
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -151,14 +151,5 @@ public class PlayerTouchController : MonoBehaviour
         controller.height = colHeight;
         isSliding = false;
         anim.SetBool("isSlide", isSliding);
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.transform.tag == "Obstacle")
-        {
-            Debug.Log("Hit");
-            PlayerManager.getInstance().isGameOver = true;
-        }
     }
 }

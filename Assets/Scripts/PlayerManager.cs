@@ -4,37 +4,34 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-
     public static PlayerManager instance;
-
-    private PlayerManager()
-    {
-        if (instance == null)
-        {
-            Debug.Log("Instance is null");
-            instance = this;
-        }
-    }
-
-    public static PlayerManager getInstance()
+    private PlayerManager() { }
+    public bool isGameOver;
+    public GameObject gameOverPanel;
+    
+    public static PlayerManager GetInstance()
     {
         return instance;
     }
 
-    public bool isGameOver;
-    public GameObject gameOverPanel;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
-    void Start()
+    private void Start()
     {
         isGameOver = false;
         Time.timeScale = 1;
     }
 
-    void Update()
+    private void Update()
     {
         if (isGameOver)
         {
-            Debug.Log("Game Over");
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
         }

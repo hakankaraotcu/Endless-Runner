@@ -10,10 +10,11 @@ public class TileManager : MonoBehaviour
     public int numberOfTiles = 4;
     private List<GameObject> activeTiles = new List<GameObject>();
 
-    public Transform playerTransform;
-    // Start is called before the first frame update
-    void Start()
+    private Transform playerTransform;
+
+    private void Start()
     {
+        playerTransform = FindObjectOfType<Player>().transform;
         for(int i = 0;i < numberOfTiles; i++)
         {
             if(i == 0)
@@ -27,8 +28,7 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if(playerTransform.position.z - 25 > zSpawn - (numberOfTiles * tileLength))
         {

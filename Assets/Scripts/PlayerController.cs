@@ -42,9 +42,8 @@ public class PlayerController : MonoBehaviour
         colCenterY = controller.center.y;
         transform.position = Vector3.zero;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         swipeLeft = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
         swipeRight = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
