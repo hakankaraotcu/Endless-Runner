@@ -158,4 +158,12 @@ public class PlayerTouchController : MonoBehaviour
         slide = false;
         anim.SetBool("isSlide", slide);
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.transform.tag == "Obstacle")
+        {
+            PlayerManager.gameOver = true;
+        }
+    }
 }
