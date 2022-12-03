@@ -21,7 +21,6 @@ public class Collectible : MonoBehaviour
         if(other.tag == "Player")
         {
             PlayerManager.GetInstance().collectibleCount += 1;
-            Debug.Log("Collectible Count: " + PlayerManager.GetInstance().collectibleCount);
             Destroy(gameObject);
         }
     }

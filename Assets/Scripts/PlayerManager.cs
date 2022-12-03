@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -7,9 +8,11 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
     private PlayerManager() { }
     public bool isGameOver;
-    public int collectibleCount;
     public GameObject gameOverPanel;
-    
+
+    public int collectibleCount;
+    public TextMeshProUGUI collectibleText;
+
     public static PlayerManager GetInstance()
     {
         return instance;
@@ -36,6 +39,7 @@ public class PlayerManager : MonoBehaviour
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
         }
+        collectibleText.text = "Coins: " + collectibleCount;
     }
 
 }

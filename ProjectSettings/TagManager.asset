@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Portal
+  - Collectible
   layers:
   - Default
   - TransparentFX
