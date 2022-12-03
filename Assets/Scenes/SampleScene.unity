@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.35171127, g: 0.72442055, b: 0.96476316, a: 1}
+  m_IndirectSpecularColor: {r: 0.3512995, g: 0.7232937, b: 0.9602419, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1448,13 +1448,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149349028387}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cba80b271fbef64f9fd3c8b06e8eec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: 0
-  slide: 0
+  isJumping: 0
+  isSliding: 0
   side: 1
   swipeLeft: 0
   swipeRight: 0
@@ -1497,13 +1497,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.79
+  m_Radius: 0.32
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0.01317625, y: 0.756, z: 0}
+  m_Center: {x: 0.01317625, y: 0.88, z: 0}
 --- !u!54 &2037529488
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1518,7 +1518,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 90
+  m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!1 &9171100395364747
 GameObject:
@@ -1883,23 +1883,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149349028387}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5198ac101661144b8e3057c282ba7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: 0
-  slide: 0
   side: 1
-  swipeLeft: 0
-  swipeRight: 0
-  swipeUp: 0
-  swipeDown: 0
-  continueToMove: 0
   xValue: 2
   speedDodge: 10
   jumpPower: 7
-  forwardSpeed: 7
+  forwardSpeed: 0
   maxSpeed: 15
   anim: {fileID: 2037529486}
 --- !u!1 &971557455299345412

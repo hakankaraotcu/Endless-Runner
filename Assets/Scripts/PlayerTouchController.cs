@@ -1,32 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 
 public class PlayerTouchController : MonoBehaviour
 {
-    public bool jump = false;
-    public bool slide = false;
+    private bool isJumping;
+    private bool isSliding;
 
-    public Side side = Side.Mid;
+    public Side side;
 
-    private float newXPos = 0f;
+    private float newXPos;
 
-    [HideInInspector]
-    public bool swipeLeft, swipeRight, swipeUp, swipeDown;
-    [HideInInspector]
-    public bool continueToMove;
-
-    public float xValue;
-    public float speedDodge;
-    public float jumpPower = 7f;
+    private bool swipeLeft, swipeRight, swipeUp, swipeDown;
     private float x;
     private float y;
-    public float forwardSpeed = 7f;
-    public float maxSpeed = 15f;
     private float colHeight;
     private float colCenterY;
+    private bool continueToMove;
+    public float xValue;
+    public float speedDodge;
+    public float jumpPower;
+    public float forwardSpeed;
+    public float maxSpeed;
 
     private float x1, x2, y1, y2;
 
@@ -36,6 +32,13 @@ public class PlayerTouchController : MonoBehaviour
 
     void Start()
     {
+        isJumping = false;
+        isSliding = false;
+        side = Side.Mid;
+        newXPos = 0f;
+        jumpPower = 7f;
+        forwardSpeed = 7f;
+        maxSpeed = 15f;
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         colHeight = controller.height;
@@ -94,16 +97,14 @@ public class PlayerTouchController : MonoBehaviour
 
             if (swipeUp)
             {
-                JumpMouse();
                 continueToMove = false;
             }
 
-            if (swipeDown && !slide)
+            if (swipeDown && !isSliding)
             {
-                StartCoroutine(SlideMouse());
+                StartCoroutine(Slide());
             }
         }
-
 
         // Increase speed
         if (forwardSpeed < maxSpeed)
@@ -116,38 +117,31 @@ public class PlayerTouchController : MonoBehaviour
         x = Mathf.Lerp(x, newXPos, Time.deltaTime * speedDodge);
         controller.Move(moveVector);
 
-        // Jumping
-        JumpMouse();
-
-        // Sliding
+        Jump();
 
     }
 
-    private void JumpMouse()
+    private void Jump()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded && swipeUp)
         {
-            if (swipeUp)
-            {
-                y = jumpPower;
-                jump = true;
-                anim.SetBool("isJump", jump);
-                swipeUp = false;
-            }
+            swipeUp = false;
+            y = jumpPower;
+            isJumping = true;
+            anim.SetBool("isJump", isJumping);
         }
         else
         {
             y -= jumpPower * 2 * Time.deltaTime;
-            jump = false;
-            anim.SetBool("isJump", jump);
+            isJumping = false;
+            anim.SetBool("isJump", isJumping);
         }
     }
 
-    private IEnumerator SlideMouse()
+    private IEnumerator Slide()
     {
-        swipeDown = false;
-        slide = true;
-        anim.SetBool("isSlide", slide);
+        isSliding = true;
+        anim.SetBool("isSlide", isSliding);
         controller.center = new Vector3(0, colCenterY / 2f, 0);
         controller.height = colHeight / 2f;
 
@@ -155,15 +149,16 @@ public class PlayerTouchController : MonoBehaviour
 
         controller.center = new Vector3(0, colCenterY, 0);
         controller.height = colHeight;
-        slide = false;
-        anim.SetBool("isSlide", slide);
+        isSliding = false;
+        anim.SetBool("isSlide", isSliding);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.transform.tag == "Obstacle")
+        if (hit.transform.tag == "Obstacle")
         {
-            PlayerManager.gameOver = true;
+            Debug.Log("Hit");
+            PlayerManager.getInstance().isGameOver = true;
         }
     }
 }

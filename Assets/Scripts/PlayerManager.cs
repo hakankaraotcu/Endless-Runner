@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static bool gameOver;
+
+    public static PlayerManager instance;
+
+    private PlayerManager()
+    {
+        if (instance == null)
+        {
+            Debug.Log("Instance is null");
+            instance = this;
+        }
+    }
+
+    public static PlayerManager getInstance()
+    {
+        return instance;
+    }
+
+    public bool isGameOver;
     public GameObject gameOverPanel;
-    // Start is called before the first frame update
+
     void Start()
     {
-        gameOver = false;
+        isGameOver = false;
         Time.timeScale = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(gameOver)
+        if (isGameOver)
         {
+            Debug.Log("Game Over");
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
         }
     }
+
 }

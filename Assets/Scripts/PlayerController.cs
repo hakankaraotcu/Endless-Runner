@@ -6,20 +6,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool jump = false;
-    public bool slide = false;
+    public bool isJumping;
+    public bool isSliding;
 
-    public Side side = Side.Mid;
-    private float newXPos = 0f;
+    public Side side;
+    private float newXPos;
     [HideInInspector]
     public bool swipeLeft, swipeRight, swipeUp, swipeDown;
     public float xValue;
     public float speedDodge;
-    public float jumpPower = 7f;
+    public float jumpPower;
     private float x;
     private float y;
-    public float forwardSpeed = 7f;
-    public float maxSpeed = 15f;
+    public float forwardSpeed;
+    public float maxSpeed;
     private float colHeight;
     private float colCenterY;
 
@@ -29,6 +29,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isJumping = false;
+        isSliding = false;
+        side = Side.Mid;
+        newXPos = 0f;
+        jumpPower = 7f;
+        forwardSpeed = 7f;
+        maxSpeed = 15f;
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         colHeight = controller.height;
@@ -47,12 +54,12 @@ public class PlayerController : MonoBehaviour
         // Move horizontally
         if (swipeLeft)
         {
-            if(side == Side.Mid)
+            if (side == Side.Mid)
             {
                 newXPos = -xValue;
                 side = Side.Left;
             }
-            else if(side == Side.Right)
+            else if (side == Side.Right)
             {
                 newXPos = 0;
                 side = Side.Mid;
@@ -73,7 +80,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Increase speed
-        if(forwardSpeed < maxSpeed)
+        if (forwardSpeed < maxSpeed)
         {
             forwardSpeed += 0.1f * Time.deltaTime;
         }
@@ -87,35 +94,33 @@ public class PlayerController : MonoBehaviour
         Jump();
 
         // Sliding
-        if(swipeDown && !slide)
+        if (swipeDown && !isSliding)
         {
             StartCoroutine(Slide());
         }
     }
-    
+
     private void Jump()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded && swipeUp)
         {
-            if (swipeUp)
-            {
-                y = jumpPower;
-                jump = true;
-                anim.SetBool("isJump", jump);
-            }
+            y = jumpPower;
+            isJumping = true;
+            anim.SetBool("isJump", isJumping);
         }
+
         else
         {
             y -= jumpPower * 2 * Time.deltaTime;
-            jump = false;
-            anim.SetBool("isJump", jump);
+            isJumping = false;
+            anim.SetBool("isJump", isJumping);
         }
     }
 
     private IEnumerator Slide()
     {
-        slide = true;
-        anim.SetBool("isSlide", slide);
+        isSliding = true;
+        anim.SetBool("isSlide", isSliding);
         controller.center = new Vector3(0, colCenterY / 2f, 0);
         controller.height = colHeight / 2f;
 
@@ -123,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
         controller.center = new Vector3(0, colCenterY, 0);
         controller.height = colHeight;
-        slide = false;
-        anim.SetBool("isSlide", slide);
+        isSliding = false;
+        anim.SetBool("isSlide", isSliding);
     }
 }
