@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
     private PlayerManager() { }
     public bool isGameOver;
+    public int collectibleCount;
     public GameObject gameOverPanel;
     
     public static PlayerManager GetInstance()

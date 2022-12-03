@@ -1507,6 +1507,7 @@ GameObject:
   - component: {fileID: 4882633833756558909}
   - component: {fileID: 3233656675322266857}
   - component: {fileID: 5043681379884686098}
+  - component: {fileID: 4764944226815040536}
   - component: {fileID: 3578064465819954172}
   - component: {fileID: 6716472557685551777}
   m_Layer: 0
@@ -1611,6 +1612,31 @@ MonoBehaviour:
   jumpPower: 7
   forwardSpeed: 0
   maxSpeed: 15
+  anim: {fileID: 0}
+--- !u!114 &4764944226815040536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766340067064418549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cba80b271fbef64f9fd3c8b06e8eec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isJumping: 0
+  isSliding: 0
+  side: 0
+  swipeLeft: 0
+  swipeRight: 0
+  swipeUp: 0
+  swipeDown: 0
+  xValue: 0
+  speedDodge: 0
+  jumpPower: 0
+  forwardSpeed: 0
+  maxSpeed: 0
   anim: {fileID: 0}
 --- !u!114 &3578064465819954172
 MonoBehaviour:

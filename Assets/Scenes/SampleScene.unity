@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOver: 0
+  collectibleCount: 0
   gameOverPanel: {fileID: 1276535794}
 --- !u!4 &487841675
 Transform:
@@ -1992,6 +1993,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2055960215425556210, guid: f5cbe8b8e2c4cc5439011d9406f58a3a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5cbe8b8e2c4cc5439011d9406f58a3a, type: 3}
 --- !u!4 &6082431007187234895 stripped
@@ -2265,6 +2270,10 @@ PrefabInstance:
     - target: {fileID: 3766340067064418549, guid: 0f598926fb1186d4fb8b91f2f1f6892a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766340067064418549, guid: 0f598926fb1186d4fb8b91f2f1f6892a, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3870907617512068129, guid: 0f598926fb1186d4fb8b91f2f1f6892a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

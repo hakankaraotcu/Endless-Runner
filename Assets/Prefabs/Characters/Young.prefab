@@ -591,6 +591,7 @@ GameObject:
   - component: {fileID: 1173562902114973534}
   - component: {fileID: 1173562902114973535}
   - component: {fileID: 2055960215425556213}
+  - component: {fileID: 7393644900414067974}
   - component: {fileID: 2501639720725760923}
   - component: {fileID: 4935726005669691091}
   m_Layer: 0
@@ -694,6 +695,31 @@ MonoBehaviour:
   forwardSpeed: 0
   maxSpeed: 15
   anim: {fileID: 1173562902114973535}
+--- !u!114 &7393644900414067974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055960215425556210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cba80b271fbef64f9fd3c8b06e8eec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isJumping: 0
+  isSliding: 0
+  side: 0
+  swipeLeft: 0
+  swipeRight: 0
+  swipeUp: 0
+  swipeDown: 0
+  xValue: 0
+  speedDodge: 0
+  jumpPower: 0
+  forwardSpeed: 0
+  maxSpeed: 0
+  anim: {fileID: 0}
 --- !u!114 &2501639720725760923
 MonoBehaviour:
   m_ObjectHideFlags: 0
