@@ -10,8 +10,15 @@ public class PlayerManager : MonoBehaviour
     public bool isGameOver;
     public GameObject gameOverPanel;
 
+    // Collectible
     public int collectibleCount;
     public TextMeshProUGUI collectibleText;
+
+    // Power
+    public PowerBar powerBar;
+    public float powerCount;
+    public float maxPowerCount = 5f;
+    public bool stopIncrease = false;
 
     public static PlayerManager GetInstance()
     {
@@ -28,6 +35,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        powerBar.SetMinPower(0);
         isGameOver = false;
         Time.timeScale = 1;
     }
@@ -40,6 +48,15 @@ public class PlayerManager : MonoBehaviour
             gameOverPanel.SetActive(true);
         }
         collectibleText.text = "Coins: " + collectibleCount;
+
+        if(powerCount <= maxPowerCount)
+        {
+            powerBar.SetPower(powerCount);
+            if(powerCount == maxPowerCount)
+            {
+                stopIncrease = true;
+            }
+        }
     }
 
 }

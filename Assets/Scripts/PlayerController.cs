@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 [System.Serializable]
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     public bool isJumping;
     public bool isSliding;
 
@@ -16,12 +20,16 @@ public class PlayerController : MonoBehaviour
     public float xValue;
     public float speedDodge;
     public float jumpPower;
+    public bool skill = false;
     private float x;
     private float y;
     public float forwardSpeed;
     public float maxSpeed;
     private float colHeight;
     private float colCenterY;
+
+    // Power time
+    public bool timer = false;
 
     public Animator anim;
     private CharacterController controller;
@@ -42,7 +50,20 @@ public class PlayerController : MonoBehaviour
         colCenterY = controller.center.y;
         transform.position = Vector3.zero;
     }
-    
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    public static PlayerController GetInstance()
+    {
+        return instance;
+    }
+
     private void Update()
     {
         swipeLeft = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
@@ -97,6 +118,19 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Slide());
         }
+
+        Skill();
+
+        // Reset power
+        if (timer)
+        {
+            PlayerManager.GetInstance().powerCount -= Time.deltaTime;
+            PowerBar.GetInstance().SetPower(PlayerManager.GetInstance().powerCount);
+            if (PlayerManager.GetInstance().powerCount <= 0)
+            {
+                ResetPower();
+            }
+        }
     }
 
     private void Jump()
@@ -129,5 +163,23 @@ public class PlayerController : MonoBehaviour
         controller.height = colHeight;
         isSliding = false;
         anim.SetBool("isSlide", isSliding);
+    }
+
+    private void Skill()
+    {
+        if((PowerBar.GetInstance().slider.value == PowerBar.GetInstance().slider.maxValue) && Input.GetKeyDown(KeyCode.F))
+        {
+            skill = true;
+            timer = true;
+        }
+    }
+
+    public void ResetPower()
+    {
+        skill = false;
+        timer = false;
+        PlayerManager.GetInstance().stopIncrease = false;
+        PowerBar.GetInstance().SetPower(0);
+        PlayerManager.GetInstance().powerCount = 0;
     }
 }

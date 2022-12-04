@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
@@ -6,8 +7,15 @@ public class PlayerCollision : MonoBehaviour
     {
         if (hit.transform.tag == "Obstacle")
         {
-            Debug.Log("Hit");
-            PlayerManager.GetInstance().isGameOver = true;
+            if (!PlayerController.GetInstance().skill)
+            {
+                PlayerManager.GetInstance().isGameOver = true;
+            }
+            else
+            {
+                Destroy(hit.gameObject);
+                PlayerController.GetInstance().ResetPower();
+            }
         }
     }
 

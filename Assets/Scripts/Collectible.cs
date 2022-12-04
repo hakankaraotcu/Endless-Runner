@@ -21,6 +21,10 @@ public class Collectible : MonoBehaviour
         if(other.tag == "Player")
         {
             PlayerManager.GetInstance().collectibleCount += 1;
+            if (!PlayerManager.GetInstance().stopIncrease)
+            {
+                PlayerManager.GetInstance().powerCount += 1;
+            }
             Destroy(gameObject);
         }
     }
