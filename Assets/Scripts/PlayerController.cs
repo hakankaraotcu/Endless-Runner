@@ -34,8 +34,15 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     private CharacterController controller;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    private void Start()
     {
         isJumping = false;
         isSliding = false;
@@ -49,14 +56,6 @@ public class PlayerController : MonoBehaviour
         colHeight = controller.height;
         colCenterY = controller.center.y;
         transform.position = Vector3.zero;
-    }
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
     }
 
     public static PlayerController GetInstance()
@@ -167,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
     private void Skill()
     {
-        if((PowerBar.GetInstance().slider.value == PowerBar.GetInstance().slider.maxValue) && Input.GetKeyDown(KeyCode.F))
+        if ((PowerBar.GetInstance().slider.value == PowerBar.GetInstance().slider.maxValue) && Input.GetKeyDown(KeyCode.F))
         {
             skill = true;
             timer = true;

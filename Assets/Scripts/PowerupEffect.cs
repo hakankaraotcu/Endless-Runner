@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PowerupEffect : ScriptableObject
+public interface PowerupEffect : ScriptableObject
 {
-    public abstract void Apply(GameObject target);
+    void Apply(GameObject target);
 }
