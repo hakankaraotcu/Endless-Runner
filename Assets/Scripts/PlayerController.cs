@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Slide());
         }
 
+        // Active skill
         Skill();
 
         // Reset power

@@ -7,14 +7,13 @@ public class Collectible : MonoBehaviour
     public Transform playerTransform;
     public float moveSpeed = 70f;
     CollectibleMove collectibleMoveScript;
-    // Start is called before the first frame update
+
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         collectibleMoveScript = gameObject.GetComponent<CollectibleMove>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Rotate(60 * Time.deltaTime, 0, 0);

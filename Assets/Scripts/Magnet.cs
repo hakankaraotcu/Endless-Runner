@@ -6,11 +6,9 @@ public class Magnet : MonoBehaviour
 {
     public GameObject collectibleDetectorObj;
 
-    // Start is called before the first frame update
     void Start()
     {
-        collectibleDetectorObj = GameObject.FindGameObjectWithTag("CollectibleDetector");
-        collectibleDetectorObj.SetActive(false);
+
     }
 
     private void OnTriggerEnter(Collider other)

@@ -6,13 +6,11 @@ public class CollectibleMove : MonoBehaviour
 {
     Collectible collectibleScript;
 
-    // Start is called before the first frame update
     void Start()
     {
         collectibleScript = GetComponent<Collectible>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, collectibleScript.playerTransform.position, collectibleScript.moveSpeed * Time.deltaTime);
