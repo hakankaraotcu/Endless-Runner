@@ -7,16 +7,18 @@ TagManager:
   - Obstacle
   - Portal
   - Collectible
+  - PlayerBubble
+  - CollectibleDetector
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - CollectibleDetector
+  - PlayerBubble
+  - Collectible
   - 
   - 
   - 

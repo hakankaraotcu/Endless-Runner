@@ -39,7 +39,7 @@ public class PlayerTouchController : MonoBehaviour
         jumpPower = 7f;
         forwardSpeed = 7f;
         maxSpeed = 15f;
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
         colHeight = controller.height;
         colCenterY = controller.center.y;
