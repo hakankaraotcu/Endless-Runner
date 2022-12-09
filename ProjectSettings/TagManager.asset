@@ -9,6 +9,7 @@ TagManager:
   - Collectible
   - PlayerBubble
   - CollectibleDetector
+  - Ground
   layers:
   - Default
   - TransparentFX

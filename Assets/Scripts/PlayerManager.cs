@@ -49,14 +49,15 @@ public class PlayerManager : MonoBehaviour
         }
         collectibleText.text = "Coins: " + collectibleCount;
 
-        if(powerCount <= maxPowerCount)
+        if (powerCount <= maxPowerCount)
         {
             powerBar.SetPower(powerCount);
-            if(powerCount == maxPowerCount)
-            {
-                stopIncrease = true;
-            }
+        }
+        if(powerCount >= maxPowerCount)
+        {
+            powerCount = maxPowerCount;
+            powerBar.SetPower(powerCount);
+            stopIncrease = true;
         }
     }
-
 }
