@@ -6,7 +6,7 @@ using UnityEngine;
 
 [System.Serializable]
 public enum HitX { Left, Mid, Right, None}
-public enum HitY { Up, Mid, Down, None }
+public enum HitY { Up, Mid, Down, Low, None }
 public enum HitZ { Forward, Mid, Backward, None }
 
 
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         side = Side.Mid;
         newXPos = 0f;
         jumpPower = 7f;
-        forwardSpeed = 7f;
+        //forwardSpeed = 0f;
         maxSpeed = 15f;
         anim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
@@ -108,10 +108,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Increase speed
-        if (forwardSpeed < maxSpeed)
+        /*if (forwardSpeed < maxSpeed)
         {
             forwardSpeed += 0.1f * Time.deltaTime;
-        }
+        }*/
 
         // Move forward
         Vector3 moveVector = new Vector3(x - transform.position.x, y * Time.deltaTime, forwardSpeed * Time.deltaTime);
@@ -197,6 +197,55 @@ public class PlayerController : MonoBehaviour
         hitX = GetHitX(col);
         hitY = GetHitY(col);
         hitZ = GetHitZ(col);
+        
+        if(hitZ == HitZ.Forward && hitX == HitX.Mid)
+        {
+            if(hitY == HitY.Mid)
+            {
+                // Stumble Low
+            }
+            else if(hitY == HitY.Down)
+            {
+                // Death Lower
+            }
+            else if(hitY == HitY.Mid)
+            {
+                if(col.tag == "MovingObject")
+                {
+                    // Death Moving Object
+                }
+                else if(col.tag != "Ramp")
+                {
+                    // Death Bounce
+                }
+            }
+            else if(hitY == HitY.Up && !isSliding)
+            {
+                // Death Upper
+            }
+        }
+        else if(hitZ == HitZ.Mid)
+        {
+            if(hitX == HitX.Right)
+            {
+                // Stumble Side Right
+            }
+            else if(hitX == HitX.Left)
+            {
+                // Stumble Side Left
+            }
+        }
+        else
+        {
+            if(hitX == HitX.Right)
+            {
+                // Stumble Corner Right
+            }
+            else if(hitX == HitX.Left)
+            {
+                // Stumble Corner Left
+            }
+        }
     }
 
     public HitX GetHitX(Collider col)
@@ -234,7 +283,12 @@ public class PlayerController : MonoBehaviour
 
         HitY hit;
 
-        if (average < 0.33f)
+        if (average < 0.17f)
+        {
+            hit = HitY.Low;
+        }
+
+        else if (average < 0.33f)
         {
             hit = HitY.Down;
         }
